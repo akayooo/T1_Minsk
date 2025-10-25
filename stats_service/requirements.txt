@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+aiokafka==0.10.0
+motor
+pydantic

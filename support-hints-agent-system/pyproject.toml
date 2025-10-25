@@ -1,0 +1,112 @@
+# Конфигурационный файл для ruff
+
+[tool.ruff]
+# Список директорий и файлов, которые будут исключены из проверки
+# Это полезно для исключения виртуальных окружений, временных файлов и т.д.
+exclude = [
+    "venv",               # Виртуальное окружение
+    ".venv",              # Виртуальное окружение
+    ".vscode",            # Настройки Visual Studio Code
+    ".idea",              # Настройки IntelliJ IDEA
+    ".git",               # Директория Git
+    ".ipynb",             # Jupyter Notebooks
+    ".ipynb_checkpoints", # Checkpoints для Jupyter Notebooks
+    "__pycache__",        # Кэш-файлы Python
+]
+
+# Максимальная длина строки
+# По умолчанию 88 символов, но можно изменить
+line-length = 120
+
+# Ширина отступа
+# По умолчанию 4 пробела
+indent-width = 4
+
+# Список кодов ошибок, которые будут игнорироваться
+# Например, ANN101 - игнорировать отсутствие аннотаций типов для self и cls
+ignore = ["ANN101", "UP006", "B904"]
+
+[tool.ruff.format]
+# Список файлов, которые будут исключены из форматирования
+# Например, файлы с расширением .pyi
+exclude = ["*.pyi"]
+
+# Стиль кавычек
+quote-style = "double"
+
+# Стиль отступа
+indent-style = "space"
+
+# Пропускать ли завершающую запятую в многострочных структурах
+skip-magic-trailing-comma = false
+
+# Стиль окончания строки
+line-ending = "auto"
+
+[tool.ruff.lint]
+# Список кодов ошибок, которые будут включены в проверку
+select = [
+    # pycodestyle (PEP 8)
+    "E",
+    # Pyflakes
+    "F",
+    "W",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    "N",
+    "S",
+    "A",
+    # pep8-naming
+    "N", 
+    # flake8-quotes
+    "Q", 
+    # flake8-annotations
+    "ANN", 
+]
+
+ignore = [
+    "UP035",
+    "UP006",
+    "E712",
+    "N812",
+    "W191"
+]
+
+# Расширение списка игнорируемых имен для pep8-naming
+pep8-naming.extend-ignore-names = [
+    "X_train",
+    "X_control",
+    "X_valid",
+    "X_test",
+    "X",
+]
+
+[tool.ruff.lint.flake8-quotes]
+# Стиль кавычек для документационных строк
+docstring-quotes = "double"
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Список игнорируемых кодов ошибок для определенных файлов
+# Например, игнорировать S101 (использование assert) в тестовых файлах
+"tests/**/*.py" = [
+    "S101", # asserts allowed in tests...
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_redundant_casts = true              # Предупреждает о избыточных приведения типов, которые не влияют на проверку типов.
+warn_unused_ignores = true               # Предупреждает о неиспользуемых директивах ignore (например, если они не нужны).
+disable_error_code = ["import-untyped"]  # Отключает предупреждения о не типизированных импортируемых модулях.
+disallow_untyped_defs = true             # Запрещает определение функций без аннотаций типов для параметров и возвращаемых значений.
+check_untyped_defs = true                # Проверяет тело функций, которые не имеют аннотаций типов.
+warn_return_any = true                   # Предупреждает, если функция возвращает значение типа Any.
+no_implicit_optional = true              # Требует явного использования Optional для параметров, которые могут быть None.
+strict_optional = true                   # Включает строгую проверку типов для значений Optional.
+ignore_missing_imports = true            # Игнорирует отсутствующие импорты, не вызывая ошибок.
+plugins = "numpy.typing.mypy_plugin"
